@@ -1,0 +1,13 @@
+{
+    "name": "qg-numerique/backend-api",
+    "description": "API Backend pour le portfolio",
+    "type": "project",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

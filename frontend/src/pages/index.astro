@@ -1,0 +1,250 @@
+---
+// Page d'accueil du portfolio
+import Layout from '../layouts/Layout.astro';
+import Dashboard from '../components/Dashboard.astro';
+---
+
+<Layout title="QG Numérique - Portfolio Auto-hébergé">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="fade-in">
+          Bienvenue dans mon <span class="highlight">QG Numérique</span>
+        </h1>
+        <p class="hero-subtitle fade-in">
+          Développeur Full-Stack & Passionné d'Infrastructure Auto-hébergée
+        </p>
+        <p class="hero-description fade-in">
+          Ce portfolio n'est pas qu'un simple site web. C'est une infrastructure complète 
+          auto-hébergée qui démontre mes compétences en développement, DevOps et administration système.
+        </p>
+        <div class="hero-cta fade-in">
+          <a href="/showroom" class="btn">Voir mes projets</a>
+          <a href="/architecture" class="btn btn-secondary">Découvrir l'infrastructure</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section class="dashboard-section">
+    <div class="container">
+      <Dashboard />
+    </div>
+  </section>
+
+  <!-- Stack Section -->
+  <section class="stack-section">
+    <div class="container">
+      <h2>🛠️ Stack Technique</h2>
+      <div class="tech-grid grid grid-3">
+        <div class="tech-card card">
+          <div class="tech-icon">🎨</div>
+          <h3 class="card-title">Frontend</h3>
+          <p class="card-text">
+            Astro, HTML/CSS, JavaScript, TypeScript
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Astro</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="tech-card card">
+          <div class="tech-icon">⚙️</div>
+          <h3 class="card-title">Backend</h3>
+          <p class="card-text">
+            PHP 8, API REST, MariaDB
+          </p>
+          <div class="tech-tags">
+            <span class="tag">PHP 8</span>
+            <span class="tag">MariaDB</span>
+          </div>
+        </div>
+
+        <div class="tech-card card">
+          <div class="tech-icon">🐳</div>
+          <h3 class="card-title">DevOps</h3>
+          <p class="card-text">
+            Docker, Nginx, Cloudflare Tunnel
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Docker</span>
+            <span class="tag">Nginx</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="featured-section">
+    <div class="container">
+      <h2>⭐ Projets Phares</h2>
+      <div id="featuredProjects" class="projects-grid grid grid-2">
+        <p>Chargement des projets...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container-narrow">
+      <div class="cta-card card">
+        <h2>Travaillons ensemble</h2>
+        <p>
+          Vous avez un projet en tête ? Je suis toujours ouvert aux opportunités 
+          et aux collaborations intéressantes.
+        </p>
+        <a href="/contact" class="btn">Me contacter</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    padding: var(--spacing-xl) 0;
+    text-align: center;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, var(--accent-color), #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-section {
+    background-color: var(--bg-primary);
+  }
+
+  .tech-grid {
+    margin-top: var(--spacing-md);
+  }
+
+  .tech-card {
+    text-align: center;
+  }
+
+  .tech-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .tech-tags {
+    display: flex;
+    gap: var(--spacing-xs);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-sm);
+  }
+
+  .tag {
+    background-color: var(--bg-accent);
+    color: var(--text-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+  }
+
+  .cta-section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .cta-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+  }
+
+  .cta-card h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .cta-card p {
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
+  }
+</style>
+
+<script>
+  // Charger les projets phares
+  async function loadFeaturedProjects() {
+    try {
+      const response = await fetch('/api/projects?featured=true');
+      const data = await response.json();
+      
+      if (data.success && data.data.length > 0) {
+        const projectsHTML = data.data.map((project: any) => `
+          <div class="card project-card">
+            <h3 class="card-title">${project.title}</h3>
+            <p class="card-text">${project.description || 'Pas de description'}</p>
+            <div class="tech-tags">
+              ${project.technologies.map((tech: string) => 
+                `<span class="tag">${tech}</span>`
+              ).join('')}
+            </div>
+          </div>
+        `).join('');
+        
+        const projectsEl = document.getElementById('featuredProjects');
+        if (projectsEl) projectsEl.innerHTML = projectsHTML;
+      } else {
+        const projectsEl = document.getElementById('featuredProjects');
+        if (projectsEl) {
+          projectsEl.innerHTML = '<p>Aucun projet phare pour le moment.</p>';
+        }
+      }
+    } catch (error) {
+      console.error('Erreur chargement projets:', error);
+      const projectsEl = document.getElementById('featuredProjects');
+      if (projectsEl) {
+        projectsEl.innerHTML = '<p>Erreur lors du chargement des projets.</p>';
+      }
+    }
+  }
+  
+  loadFeaturedProjects();
+</script>

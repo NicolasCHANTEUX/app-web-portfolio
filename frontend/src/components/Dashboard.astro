@@ -1,0 +1,173 @@
+---
+// Composant Dashboard - Affiche les stats du serveur en temps réel
+---
+
+<div class="dashboard-widget">
+  <h3>📊 Dashboard Serveur</h3>
+  
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">CPU</div>
+      <div class="stat-value" id="cpuValue">--</div>
+      <div class="stat-unit">%</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-label">RAM</div>
+      <div class="stat-value" id="ramValue">--</div>
+      <div class="stat-unit">%</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-label">Disque</div>
+      <div class="stat-value" id="diskValue">--</div>
+      <div class="stat-unit">%</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-label">Uptime</div>
+      <div class="stat-value" id="uptimeValue">--</div>
+      <div class="stat-unit">j</div>
+    </div>
+  </div>
+  
+  <div class="docker-status" id="dockerStatus">
+    <p>🐳 Docker: <span id="dockerContainers">Chargement...</span></p>
+  </div>
+  
+  <div class="last-update">
+    Dernière mise à jour: <span id="lastUpdate">--:--:--</span>
+  </div>
+</div>
+
+<style>
+  .dashboard-widget {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .dashboard-widget h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .stat-card {
+    background: var(--bg-accent);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: transform var(--transition-fast);
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    font-family: 'Courier New', monospace;
+  }
+  
+  .stat-unit {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+  
+  .docker-status {
+    background: var(--bg-accent);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+    font-family: 'Courier New', monospace;
+  }
+  
+  .last-update {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+  
+  .loading {
+    opacity: 0.6;
+  }
+</style>
+
+<script>
+  // Fonction pour mettre à jour les stats
+  async function updateDashboard() {
+    try {
+      // Récupérer les stats serveur
+      const serverResponse = await fetch('/api/server/status');
+      const serverData = await serverResponse.json();
+      
+      if (serverData.success) {
+        const stats = serverData.data;
+        
+        // Mettre à jour CPU
+        const cpuEl = document.getElementById('cpuValue');
+        if (cpuEl) cpuEl.textContent = String(stats.cpu.percent);
+        
+        // Mettre à jour RAM
+        const ramEl = document.getElementById('ramValue');
+        if (ramEl) ramEl.textContent = String(stats.memory.percent);
+        
+        // Mettre à jour Disque
+        const diskEl = document.getElementById('diskValue');
+        if (diskEl) diskEl.textContent = String(stats.disk.percent);
+        
+        // Mettre à jour Uptime
+        const uptimeDays = Math.floor(stats.uptime.seconds / 86400);
+        const uptimeEl = document.getElementById('uptimeValue');
+        if (uptimeEl) uptimeEl.textContent = String(uptimeDays);
+      }
+      
+      // Récupérer l'état Docker
+      const dockerResponse = await fetch('/api/server/docker');
+      const dockerData = await dockerResponse.json();
+      
+      if (dockerData.success) {
+        const { running, total } = dockerData.data;
+        const dockerEl = document.getElementById('dockerContainers');
+        if (dockerEl) dockerEl.textContent = `${running} actifs / ${total} total`;
+      }
+      
+      // Mettre à jour l'heure
+      const now = new Date();
+      const updateEl = document.getElementById('lastUpdate');
+      if (updateEl) updateEl.textContent = now.toLocaleTimeString();
+      
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour du dashboard:', error);
+      const cpuEl = document.getElementById('cpuValue');
+      const ramEl = document.getElementById('ramValue');
+      const dockerEl = document.getElementById('dockerContainers');
+      if (cpuEl) cpuEl.textContent = '??';
+      if (ramEl) ramEl.textContent = '??';
+      if (dockerEl) dockerEl.textContent = 'Erreur';
+    }
+  }
+  
+  // Mise à jour initiale
+  updateDashboard();
+  
+  // Mise à jour toutes les 5 secondes
+  setInterval(updateDashboard, 5000);
+</script>

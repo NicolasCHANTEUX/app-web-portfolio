@@ -1,0 +1,30 @@
+# Environment
+.env
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.astro/
+frontend/package-lock.json
+
+# Docker
+mariadb_data/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# SSL Certificates (à ne pas commiter)
+nginx/ssl/*.key
+nginx/ssl/*.pem
+nginx/ssl/*.crt

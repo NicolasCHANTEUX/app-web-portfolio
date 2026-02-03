@@ -1,0 +1,285 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Architecture - Portfolio">
+  <section class="architecture-section">
+    <div class="container">
+      <h1>🏗️ Architecture du QG Numérique</h1>
+      <p class="intro">
+        Découvrez comment ce portfolio est construit, de l'infrastructure hardware 
+        jusqu'au code qui fait tourner l'interface que vous voyez.
+      </p>
+
+      <!-- Schéma interactif -->
+      <div class="architecture-diagram">
+        <h2>Schéma d'Infrastructure</h2>
+        <div class="diagram-container">
+          <svg viewBox="0 0 800 600" class="infra-svg">
+            <!-- Internet/Cloudflare -->
+            <g class="node" data-info="cloudflare">
+              <rect x="350" y="20" width="100" height="60" rx="8" fill="#f38020"/>
+              <text x="400" y="55" text-anchor="middle" fill="white">Cloudflare</text>
+            </g>
+            
+            <!-- Vieux PC / Serveur -->
+            <g class="node" data-info="server">
+              <rect x="330" y="150" width="140" height="80" rx="8" fill="#3b82f6"/>
+              <text x="400" y="185" text-anchor="middle" fill="white">🖥️ Vieux PC</text>
+              <text x="400" y="210" text-anchor="middle" fill="white" font-size="12">Docker Host</text>
+            </g>
+            
+            <!-- Nginx -->
+            <g class="node" data-info="nginx">
+              <rect x="150" y="290" width="100" height="60" rx="8" fill="#009639"/>
+              <text x="200" y="325" text-anchor="middle" fill="white">Nginx</text>
+            </g>
+            
+            <!-- Frontend -->
+            <g class="node" data-info="frontend">
+              <rect x="50" y="420" width="120" height="60" rx="8" fill="#9333ea"/>
+              <text x="110" y="455" text-anchor="middle" fill="white">Frontend</text>
+            </g>
+            
+            <!-- Backend -->
+            <g class="node" data-info="backend">
+              <rect x="220" y="420" width="120" height="60" rx="8" fill="#8b5cf6"/>
+              <text x="280" y="455" text-anchor="middle" fill="white">Backend PHP</text>
+            </g>
+            
+            <!-- Base de données -->
+            <g class="node" data-info="database">
+              <rect x="390" y="420" width="120" height="60" rx="8" fill="#dc2626"/>
+              <text x="450" y="455" text-anchor="middle" fill="white">MariaDB</text>
+            </g>
+            
+            <!-- Autres conteneurs -->
+            <g class="node" data-info="others">
+              <rect x="560" y="420" width="140" height="60" rx="8" fill="#64748b"/>
+              <text x="630" y="455" text-anchor="middle" fill="white">Autres Projets</text>
+            </g>
+            
+            <!-- Connexions -->
+            <line x1="400" y1="80" x2="400" y2="150" stroke="#666" stroke-width="2"/>
+            <line x1="400" y1="230" x2="200" y2="290" stroke="#666" stroke-width="2"/>
+            
+            <line x1="200" y1="350" x2="110" y2="420" stroke="#666" stroke-width="2"/>
+            <line x1="200" y1="350" x2="280" y2="420" stroke="#666" stroke-width="2"/>
+            
+            <line x1="280" y1="420" x2="450" y2="420" stroke="#666" stroke-width="2"/>
+            <line x1="400" y1="230" x2="630" y2="420" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+          </svg>
+        </div>
+        
+        <div id="nodeInfo" class="node-info">
+          <p>Survolez un élément pour voir les détails</p>
+        </div>
+      </div>
+
+      <!-- Stack détaillée -->
+      <div class="stack-details">
+        <h2>Stack Technique Détaillée</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3 class="card-title">🎨 Frontend</h3>
+            <ul>
+              <li><strong>Astro</strong> - Framework moderne pour sites statiques</li>
+              <li><strong>TypeScript</strong> - Typage strict JavaScript</li>
+              <li><strong>Islands Architecture</strong> - Hydratation partielle</li>
+              <li><strong>CSS Variables</strong> - Thème dynamique</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">⚙️ Backend</h3>
+            <ul>
+              <li><strong>PHP 8.2</strong> - API REST minimaliste</li>
+              <li><strong>PDO</strong> - Accès base de données sécurisé</li>
+              <li><strong>Shell Exec</strong> - Monitoring système</li>
+              <li><strong>Docker SDK</strong> - Gestion conteneurs</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🗄️ Base de Données</h3>
+            <ul>
+              <li><strong>MariaDB 10.11</strong> - SGBD relationnel</li>
+              <li><strong>InnoDB</strong> - Moteur transactionnel</li>
+              <li><strong>UTF8MB4</strong> - Support Unicode complet</li>
+              <li><strong>Indexes optimisés</strong> - Performance</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">🐳 Infrastructure</h3>
+            <ul>
+              <li><strong>Docker Compose</strong> - Orchestration</li>
+              <li><strong>Nginx</strong> - Reverse Proxy</li>
+              <li><strong>Cloudflare Tunnel</strong> - Exposition sécurisée</li>
+              <li><strong>Alpine Linux</strong> - Images légères</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Métriques -->
+      <div class="metrics-section">
+        <h2>📊 Métriques de Performance</h2>
+        <div class="grid grid-3">
+          <div class="metric-card card">
+            <div class="metric-value">~200KB</div>
+            <div class="metric-label">Poids page d'accueil</div>
+          </div>
+          <div class="metric-card card">
+            <div class="metric-value">&lt;100ms</div>
+            <div class="metric-label">Temps réponse API</div>
+          </div>
+          <div class="metric-card card">
+            <div class="metric-value">5 Watts</div>
+            <div class="metric-label">Consommation serveur</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .architecture-section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+  }
+
+  .architecture-diagram {
+    margin: var(--spacing-xl) 0;
+  }
+
+  .diagram-container {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-md) 0;
+  }
+
+  .infra-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .node {
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .node:hover rect {
+    filter: brightness(1.2);
+    stroke: white;
+    stroke-width: 2;
+  }
+
+  .node text {
+    pointer-events: none;
+    font-weight: 600;
+  }
+
+  .node-info {
+    background: var(--bg-accent);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-md);
+    min-height: 100px;
+  }
+
+  .stack-details,
+  .metrics-section {
+    margin: var(--spacing-xl) 0;
+  }
+
+  .stack-details ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .stack-details li {
+    padding: var(--spacing-xs) 0;
+    color: var(--text-secondary);
+  }
+
+  .metric-card {
+    text-align: center;
+    padding: var(--spacing-lg);
+  }
+
+  .metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    font-family: 'Courier New', monospace;
+  }
+
+  .metric-label {
+    margin-top: var(--spacing-xs);
+    color: var(--text-secondary);
+  }
+</style>
+
+<script>
+  const nodeDescriptions = {
+    cloudflare: {
+      title: "Cloudflare Tunnel",
+      content: "Expose le serveur local sur Internet sans ouvrir de ports. Fournit SSL, cache et protection DDoS gratuitement."
+    },
+    server: {
+      title: "Serveur Principal",
+      content: "Vieux PC recyclé tournant 24/7. Héberge Docker et tous les conteneurs. Faible consommation (~5W)."
+    },
+    nginx: {
+      title: "Nginx Reverse Proxy",
+      content: "Route les requêtes HTTP vers les bons conteneurs. Gère le cache, la compression et le SSL."
+    },
+    frontend: {
+      title: "Frontend Astro",
+      content: "Site statique généré avec Astro. Ultra-léger (~200KB). Îlots JavaScript pour les parties interactives."
+    },
+    backend: {
+      title: "API PHP 8",
+      content: "API REST minimaliste sans framework. Fournit les stats serveur, Docker et gère les contacts."
+    },
+    database: {
+      title: "MariaDB",
+      content: "Base de données pour les projets, la timeline, les contacts et les analytics."
+    },
+    others: {
+      title: "Autres Projets",
+      content: "Conteneurs additionnels pour d'autres projets et expérimentations."
+    }
+  };
+
+  const nodes = document.querySelectorAll('.node');
+  const infoBox = document.getElementById('nodeInfo');
+
+  nodes.forEach(node => {
+    node.addEventListener('mouseenter', () => {
+      const key = (node as HTMLElement).dataset.info;
+      const info = key ? nodeDescriptions[key as keyof typeof nodeDescriptions] : null;
+      if (info && infoBox) {
+        infoBox.innerHTML = `
+          <h4 style="margin-bottom: 0.5rem; color: var(--accent-color);">${info.title}</h4>
+          <p style="margin: 0; color: var(--text-secondary);">${info.content}</p>
+        `;
+      }
+    });
+
+    node.addEventListener('mouseleave', () => {
+      if (infoBox) {
+        infoBox.innerHTML = '<p>Survolez un élément pour voir les détails</p>';
+      }
+    });
+  });
+</script>
