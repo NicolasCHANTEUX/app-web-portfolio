@@ -28,6 +28,7 @@ class ServerMonitor {
 
     /**
      * Charge CPU (moyenne sur 1 minute)
+     * Note: Plafonné à 100% car le load average peut dépasser le nombre de cœurs
      */
     private static function getCpuUsage(): array {
         if (PHP_OS_FAMILY === 'Windows') {
@@ -36,9 +37,10 @@ class ServerMonitor {
             preg_match('/\d+/', $output, $matches);
             $usage = isset($matches[0]) ? (int)$matches[0] : 0;
         } else {
-            // Linux - lit /proc/loadavg
+            // Linux - lit /proc/loadavg (moyenne sur 1 min)
             $load = sys_getloadavg();
-            $usage = round($load[0] * 100 / self::getCpuCores(), 2);
+            // Plafonne à 100% car le load peut dépasser le nb de cœurs
+            $usage = min(100, round($load[0] * 100 / self::getCpuCores(), 2));
         }
 
         return [

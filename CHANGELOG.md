@@ -1,5 +1,61 @@
 # ✨ Améliorations de Sécurité et Qualité
 
+## [Version 1.1.1] - 4 février 2026 (Corrections finales)
+
+### 🔒 Sécurité - Rate Limiting
+
+**Ajout de la protection rate limiting côté PHP pour l'API Contact**
+
+**Problème identifié** : L'endpoint `/api/contact` n'avait qu'une protection Nginx. Si quelqu'un contournait Nginx (accès direct au port PHP-FPM), il pouvait spammer les soumissions.
+
+**Solution implémentée** :
+```php
+// Protection double couche : Nginx + PHP
+// Limite : 3 soumissions par IP par heure
+$rateLimitFile = sys_get_temp_dir() . '/contact_ratelimit_' . md5($clientIp);
+```
+
+**Fonctionnement** :
+1. Stockage des tentatives dans `/tmp` avec timestamp
+2. Nettoyage automatique des entrées > 1h
+3. Retourne HTTP 429 (Too Many Requests) après 3 tentatives
+4. Message clair : "Trop de requêtes. Veuillez réessayer dans 1 heure."
+
+**Tests** :
+- ✅ 1ère soumission : HTTP 200 OK
+- ✅ 2ème soumission : HTTP 200 OK  
+- ✅ 3ème soumission : HTTP 200 OK
+- ✅ 4ème soumission : HTTP 429 BLOCKED
+
+---
+
+### 🐛 Correction - CPU plafonné à 100%
+
+**Problème** : Sur un serveur très chargé, le load average peut dépasser le nombre de cœurs (ex: load de 4.0 sur 2 cœurs = 200%)
+
+**Solution** :
+```php
+// Avant
+$usage = round($load[0] * 100 / self::getCpuCores(), 2);
+
+// Après  
+$usage = min(100, round($load[0] * 100 / self::getCpuCores(), 2));
+```
+
+**Impact** : Les valeurs CPU restent cohérentes et ne dépassent jamais 100%
+
+---
+
+### 📚 Documentation
+
+**Ajouté** :
+- Script de test du rate limiting : `scripts/test-rate-limit.ps1`
+- Documentation détaillée dans `SECURITY.md` sur la protection rate limiting
+
+---
+
+## [Version 1.1.0] - 4 février 2026  
+
 **Date** : 4 février 2026  
 **Version** : 1.1.0  
 
