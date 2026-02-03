@@ -30,6 +30,7 @@ services:
       - ./backend/src:/var/www/backend/src
       - ./backend/database:/var/www/backend/database
       - /var/run/docker.sock:/var/run/docker.sock:ro  # Pour monitorer les conteneurs
+      - /sys/class/thermal:/sys/class/thermal:ro  # Accès aux capteurs de température (Linux uniquement)
     environment:
       - DB_HOST=mariadb
       - DB_NAME=portfolio_db

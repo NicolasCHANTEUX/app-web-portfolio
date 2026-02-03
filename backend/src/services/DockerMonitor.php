@@ -1,4 +1,13 @@
 <?php
+/**
+ * Monitore l'état des conteneurs Docker
+ * Nécessite l'accès au socket Docker (/var/run/docker.sock monté en volume)
+ * 
+ * SÉCURITÉ CRITIQUE:
+ * - Utilise shell_exec() uniquement avec des commandes statiques (pas de paramètres utilisateur)
+ * - Toutes les commandes sont hardcodées et contrôlées
+ * - Ne JAMAIS passer de $_GET, $_POST ou données non validées dans shell_exec()
+ */
 namespace App\Services;
 
 class DockerMonitor {

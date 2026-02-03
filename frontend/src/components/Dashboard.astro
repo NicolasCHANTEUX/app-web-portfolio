@@ -25,6 +25,12 @@
     </div>
     
     <div class="stat-card">
+      <div class="stat-label">🌡️ Temp</div>
+      <div class="stat-value" id="temperatureValue">--</div>
+      <div class="stat-unit"></div>
+    </div>
+    
+    <div class="stat-card">
       <div class="stat-label">Uptime</div>
       <div class="stat-value" id="uptimeValue">--</div>
       <div class="stat-unit">j</div>
@@ -123,15 +129,19 @@
         
         // Mettre à jour CPU
         const cpuEl = document.getElementById('cpuValue');
-        if (cpuEl) cpuEl.textContent = String(stats.cpu.percent);
+        if (cpuEl) cpuEl.textContent = stats.cpu?.percent != null ? String(stats.cpu.percent) : 'N/A';
         
         // Mettre à jour RAM
         const ramEl = document.getElementById('ramValue');
-        if (ramEl) ramEl.textContent = String(stats.memory.percent);
+        if (ramEl) ramEl.textContent = stats.memory?.percent != null ? String(stats.memory.percent) : 'N/A';
         
         // Mettre à jour Disque
         const diskEl = document.getElementById('diskValue');
-        if (diskEl) diskEl.textContent = String(stats.disk.percent);
+        if (diskEl) diskEl.textContent = stats.disk?.percent != null ? String(stats.disk.percent) : 'N/A';
+        
+        // Mettre à jour Température (peut être null si conteneur sans accès capteurs)
+        const tempEl = document.getElementById('temperatureValue');
+        if (tempEl) tempEl.textContent = stats.temperature != null ? String(stats.temperature) + '°C' : 'N/A';
         
         // Mettre à jour Uptime
         const uptimeDays = Math.floor(stats.uptime.seconds / 86400);

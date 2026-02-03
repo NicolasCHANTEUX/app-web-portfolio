@@ -1,4 +1,13 @@
 <?php
+/**
+ * Service de monitoring système
+ * Récupère les métriques CPU, RAM, Disque
+ * 
+ * SÉCURITÉ CRITIQUE:
+ * - Utilise shell_exec() uniquement avec des commandes statiques
+ * - Pas de paramètres utilisateur dans les commandes shell
+ * - Toutes les lectures sont en lecture seule (/proc, /sys)
+ */
 namespace App\Services;
 
 class ServerMonitor {
@@ -128,6 +137,8 @@ class ServerMonitor {
 
     /**
      * Température CPU (si disponible)
+     * NOTE: Nécessite l'accès au /sys/class/thermal du conteneur (voir docker-compose.yml)
+     * Retourne null si pas d'accès aux capteurs (normal dans un conteneur non-privilégié)
      */
     private static function getTemperature(): ?array {
         if (PHP_OS_FAMILY === 'Windows') {
@@ -136,14 +147,20 @@ class ServerMonitor {
             return null;
         } else {
             // Linux - essaye de lire les capteurs thermiques
+            // NOTE SÉCURITÉ: Lecture seule de fichiers système, pas de paramètres utilisateur
             $tempFiles = glob('/sys/class/thermal/thermal_zone*/temp');
             if (empty($tempFiles)) {
-                return null;
+                return null; // Conteneur sans accès aux capteurs
             }
 
             $temps = [];
             foreach ($tempFiles as $file) {
-                $temp = (int)file_get_contents($file) / 1000; // Convertir millidegrés en degrés
+                if (!is_readable($file)) continue;
+                
+                $content = @file_get_contents($file);
+                if ($content === false) continue;
+                
+                $temp = (int)$content / 1000; // Convertir millidegrés en degrés
                 $temps[] = $temp;
             }
 

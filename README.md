@@ -1,24 +1,46 @@
 # 🚀 Portfolio - QG Numérique
 
-Un portfolio auto-hébergé avec architecture découplée (Headless) démontrant expertise technique en développement full-stack et DevOps.
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)](https://www.docker.com/)
+[![Astro](https://img.shields.io/badge/Astro-5.17.1-FF5D01?logo=astro)](https://astro.build/)
+[![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php)](https://www.php.net/)
+[![MariaDB](https://img.shields.io/badge/MariaDB-10.11-003545?logo=mariadb)](https://mariadb.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+Un portfolio auto-hébergé avec **architecture découplée (Headless)** démontrant expertise technique en développement full-stack et DevOps.
+
+> 📚 **Documentation complète** :  
+> - [🔧 Architecture Technique](ARCHITECTURE.md) - Détails techniques, flux de données, monitoring  
+> - [🔒 Notes de Sécurité](SECURITY.md) - Justification des choix, bonnes pratiques  
+
+---
 
 ## 🏗️ Architecture
 
 ### Stack Technique
-- **Frontend**: Astro (HTML statique avec îlots interactifs)
-- **Backend**: PHP 8 (API REST)
-- **Base de données**: MariaDB
-- **Reverse Proxy**: Nginx
+- **Frontend**: Astro 5.17.1 (HTML statique avec Islands Architecture)
+- **Backend**: PHP 8.2-FPM Alpine (API REST sans framework)
+- **Base de données**: MariaDB 10.11
+- **Reverse Proxy**: Nginx Alpine
 - **Orchestration**: Docker Compose
-- **Hébergement**: Auto-hébergé avec Cloudflare Tunnel
+- **Hébergement**: Auto-hébergé (homelab)
 
 ### Principe de fonctionnement
 ```
-Internet → Cloudflare Tunnel → Nginx → {
-    / → Frontend (HTML statique)
-    /api/* → Backend PHP (API REST)
+Internet → Nginx (Port 80) → {
+    / → Frontend (HTML statique pré-généré)
+    /api/* → Backend PHP-FPM (FastCGI)
 }
+                ↓
+           MariaDB (BDD)
 ```
+
+**Avantages de cette architecture :**
+✅ Performance maximale (frontend statique)  
+✅ Consommation minimale (PHP léger, pas de framework lourd)  
+✅ Scalabilité facile (backend API séparé)  
+✅ SEO optimal (HTML pré-rendu)  
+
+---
 
 ## 📁 Structure du projet
 
