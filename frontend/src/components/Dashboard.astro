@@ -141,7 +141,7 @@
         
         // Mettre à jour Température (peut être null si conteneur sans accès capteurs)
         const tempEl = document.getElementById('temperatureValue');
-        if (tempEl) tempEl.textContent = stats.temperature != null ? String(stats.temperature) + '°C' : 'N/A';
+        if (tempEl) tempEl.textContent = stats.temperature?.celsius != null ? String(stats.temperature.celsius) + '°C' : 'N/A';
         
         // Mettre à jour Uptime
         const uptimeDays = Math.floor(stats.uptime.seconds / 86400);
