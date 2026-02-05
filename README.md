@@ -84,9 +84,11 @@ portfolio/
 - **Status page**: Journal des incidents et résolutions
 
 ### 3. La Dimension Expérimentale
-- **Showroom**: 3-4 projets phares avec case studies détaillés
+- **Showroom**: 3-4 projets phares avec case studies détaillés (Challenge/Solution/Architecture)
 - **Le Labo**: Petits scripts et expérimentations
 - **Digital Garden**: Notes techniques type TIL (Today I Learned)
+
+> 📖 **[Guide complet de la Showroom](SHOWROOM.md)** - Comment ajouter des projets, créer des images, structure de données
 
 ### 4. La Dimension Interactive
 - **Terminal Easter Egg**: Console interactive (Ctrl+T)

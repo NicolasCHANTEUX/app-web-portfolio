@@ -1,0 +1,291 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+// Fetch des projets depuis l'API
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL || 'http://localhost/api';
+let projects = [];
+let error = null;
+
+try {
+  const response = await fetch(`${API_BASE_URL}/projects.php`);
+  const data = await response.json();
+  
+  if (data.success) {
+    projects = data.data;
+  } else {
+    error = data.error || 'Erreur lors du chargement des projets';
+  }
+} catch (e) {
+  error = 'Impossible de charger les projets';
+  console.error('Erreur fetch projets:', e);
+}
+
+// Filtrer pour n'afficher que les projets "Showroom" (featured)
+const showroomProjects = projects.filter((p: any) => p.category === 'showroom' || p.is_featured);
+const laboProjects = projects.filter((p: any) => p.category === 'labo');
+---
+
+<Layout title="Showroom - Projets">
+  <section class="showroom-section">
+    <div class="container">
+      <!-- En-tête -->
+      <div class="header">
+        <h1>🎨 Showroom</h1>
+        <p class="intro">
+          Sélection de projets qui illustrent ma démarche : architecture réfléchie, 
+          solutions pragmatiques et maîtrise de la stack complète.
+        </p>
+      </div>
+
+      <!-- Filtres de catégories -->
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">
+          Tous les Projets
+        </button>
+        <button class="filter-btn" data-filter="showroom">
+          🚀 Flagships
+        </button>
+        <button class="filter-btn" data-filter="labo">
+          🧪 Labo
+        </button>
+      </div>
+
+      <!-- Message d'erreur si nécessaire -->
+      {error && (
+        <div class="error-message">
+          <p>⚠️ {error}</p>
+        </div>
+      )}
+
+      <!-- Grille de projets -->
+      {!error && projects.length > 0 ? (
+        <div class="projects-grid">
+          {projects.map((project: any) => (
+            <div class="project-item" data-category={project.category}>
+              <ProjectCard project={project} />
+            </div>
+          ))}
+        </div>
+      ) : !error && (
+        <div class="empty-state">
+          <p>Aucun projet à afficher pour le moment.</p>
+          <p class="hint">Exécutez le fichier <code>backend/database/seed_projects.sql</code> pour peupler la base.</p>
+        </div>
+      )}
+
+      <!-- Stats en bas de page -->
+      {projects.length > 0 && (
+        <div class="showroom-stats">
+          <div class="stat">
+            <span class="stat-value">{showroomProjects.length}</span>
+            <span class="stat-label">Projets Flagship</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{laboProjects.length}</span>
+            <span class="stat-label">Expérimentations</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{projects.reduce((acc: number, p: any) => acc + (p.technologies?.length || 0), 0)}</span>
+            <span class="stat-label">Technologies Utilisées</span>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .showroom-section {
+    padding: var(--spacing-xl) 0;
+    min-height: 80vh;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .header h1 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .intro {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Filtres */
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-xl) 0;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+  }
+
+  .filter-btn.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: white;
+  }
+
+  /* Grille de projets */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+  }
+
+  .project-item {
+    opacity: 1;
+    transform: scale(1);
+    transition: all var(--transition-normal);
+  }
+
+  .project-item.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  /* Messages */
+  .error-message,
+  .empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    margin: var(--spacing-xl) 0;
+  }
+
+  .error-message {
+    border: 2px solid #dc2626;
+    color: #dc2626;
+  }
+
+  .empty-state {
+    border: 2px dashed var(--border-color);
+  }
+
+  .empty-state .hint {
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .empty-state code {
+    background: var(--bg-accent);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* Stats */
+  .showroom-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .stat {
+    text-align: center;
+    padding: var(--spacing-md);
+  }
+
+  .stat-value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    font-family: 'Courier New', monospace;
+  }
+
+  .stat-label {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header h1 {
+      font-size: 2rem;
+    }
+
+    .intro {
+      font-size: 1rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .showroom-stats {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  // Système de filtrage des projets
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Retirer la classe active de tous les boutons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Ajouter la classe active au bouton cliqué
+        button.classList.add('active');
+
+        const filter = (button as HTMLElement).dataset.filter;
+
+        // Filtrer les projets
+        projectItems.forEach(item => {
+          const category = (item as HTMLElement).dataset.category;
+          
+          if (filter === 'all' || category === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+  });
+</script>

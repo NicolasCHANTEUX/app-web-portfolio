@@ -1,0 +1,107 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="termGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background (terminal black) -->
+  <rect width="1200" height="675" fill="url(#termGrad)"/>
+  
+  <!-- Terminal window header -->
+  <rect x="50" y="50" width="1100" height="30" rx="5" fill="#2a2a2a"/>
+  <circle cx="70" cy="65" r="6" fill="#ff5f57"/>
+  <circle cx="90" cy="65" r="6" fill="#febc2e"/>
+  <circle cx="110" cy="65" r="6" fill="#28c840"/>
+  <text x="130" y="70" font-size="14" font-family="monospace" fill="#aaa">backup-docker.sh</text>
+  
+  <!-- Terminal content area -->
+  <rect x="50" y="80" width="1100" height="545" fill="#0a0a0a"/>
+  
+  <!-- Terminal text -->
+  <g font-family="'Courier New', monospace" font-size="14" fill="#0f0">
+    <!-- Command prompt -->
+    <text x="70" y="110">
+      <tspan fill="#00ff00">root@homelab</tspan>
+      <tspan fill="#fff">:</tspan>
+      <tspan fill="#00d4ff">~/scripts</tspan>
+      <tspan fill="#fff">$ ./backup-docker.sh</tspan>
+    </text>
+    
+    <!-- Script output -->
+    <text x="70" y="140" fill="#ffd700">🔄 Docker Backup System v2.1</text>
+    <text x="70" y="165" fill="#aaa">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</text>
+    
+    <text x="70" y="190">
+      <tspan fill="#00d4ff">[INFO]</tspan>
+      <tspan fill="#ccc"> Scanning Docker volumes...</tspan>
+    </text>
+    
+    <text x="70" y="215">
+      <tspan fill="#00ff00">✓</tspan>
+      <tspan fill="#ccc"> Found 12 volumes to backup</tspan>
+    </text>
+    
+    <text x="70" y="240" fill="#aaa">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</text>
+    
+    <!-- Volume backups -->
+    <text x="70" y="265">
+      <tspan fill="#00d4ff">[1/12]</tspan>
+      <tspan fill="#ccc"> Backing up </tspan>
+      <tspan fill="#fff">portfolio_db_data</tspan>
+    </text>
+    <text x="100" y="285" fill="#0f0">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</text>
+    <text x="320" y="285" fill="#0f0">100% (45.2 MB)</text>
+    
+    <text x="70" y="310">
+      <tspan fill="#00d4ff">[2/12]</tspan>
+      <tspan fill="#ccc"> Backing up </tspan>
+      <tspan fill="#fff">music_app_cache</tspan>
+    </text>
+    <text x="100" y="330" fill="#0f0">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</text>
+    <text x="320" y="330" fill="#0f0">100% (1.2 GB)</text>
+    
+    <text x="70" y="355">
+      <tspan fill="#00d4ff">[3/12]</tspan>
+      <tspan fill="#ccc"> Backing up </tspan>
+      <tspan fill="#fff">nginx_config</tspan>
+    </text>
+    <text x="100" y="375" fill="#0f0">▓▓▓▓▓▓▓▓▓▓▓▓▓▓</text>
+    <text x="220" y="375" fill="#ffd700">70% (12.8 MB)</text>
+    
+    <text x="70" y="405" fill="#aaa">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</text>
+    
+    <!-- Stats -->
+    <text x="70" y="430">
+      <tspan fill="#ffd700">📊 Statistics:</tspan>
+    </text>
+    <text x="100" y="455" fill="#ccc">Total size: 2.1 GB</text>
+    <text x="100" y="475" fill="#ccc">Compression ratio: 67%</text>
+    <text x="100" y="495" fill="#ccc">Duration: 47s</text>
+    
+    <text x="70" y="520" fill="#aaa">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</text>
+    
+    <text x="70" y="545">
+      <tspan fill="#00ff00">✓</tspan>
+      <tspan fill="#0f0"> Backup completed successfully!</tspan>
+    </text>
+    
+    <text x="70" y="570">
+      <tspan fill="#00d4ff">[INFO]</tspan>
+      <tspan fill="#ccc"> Backup saved to: /backups/2026-02-05_22-30-15.tar.gz</tspan>
+    </text>
+    
+    <!-- Cursor -->
+    <text x="70" y="600">
+      <tspan fill="#00ff00">root@homelab</tspan>
+      <tspan fill="#fff">:</tspan>
+      <tspan fill="#00d4ff">~/scripts</tspan>
+      <tspan fill="#fff">$ </tspan>
+      <tspan fill="#fff" opacity="0.7">█</tspan>
+    </text>
+  </g>
+  
+  <!-- Terminal window shadow -->
+  <rect x="50" y="50" width="1100" height="575" rx="5" fill="none" stroke="#444" stroke-width="2"/>
+</svg>

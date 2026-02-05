@@ -30,9 +30,14 @@ try {
     
     $projects = $db->fetchAll($sql, $params);
     
-    // Décoder le JSON des technologies
+    // Décoder le JSON des technologies et du contenu enrichi
     foreach ($projects as &$project) {
         $project['technologies'] = json_decode($project['technologies'], true);
+        // Décoder le contenu (challenge, solution, architecture)
+        if (!empty($project['content'])) {
+            $project['details'] = json_decode($project['content'], true);
+            unset($project['content']); // On renomme pour plus de clarté côté frontend
+        }
     }
     
     echo json_encode([
