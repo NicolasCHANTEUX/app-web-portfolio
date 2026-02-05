@@ -14,6 +14,9 @@ import Layout from '../layouts/Layout.astro';
       <!-- Schéma interactif -->
       <div class="architecture-diagram">
         <h2>Schéma d'Infrastructure</h2>
+        <p class="instruction">
+          <span class="icon">👆</span> Survolez les composants du schéma pour explorer le flux de données et les choix de sécurité.
+        </p>
         <div class="diagram-container">
           <svg viewBox="0 0 800 600" class="infra-svg">
             <!-- Internet/Cloudflare -->
@@ -56,18 +59,19 @@ import Layout from '../layouts/Layout.astro';
             <!-- Autres conteneurs -->
             <g class="node" data-info="others">
               <rect x="560" y="420" width="140" height="60" rx="8" fill="#64748b"/>
-              <text x="630" y="455" text-anchor="middle" fill="white">Autres Projets</text>
+              <text x="630" y="445" text-anchor="middle" fill="white" font-size="14">Labs & Services</text>
+              <text x="630" y="463" text-anchor="middle" fill="white" font-size="11">(Isolés)</text>
             </g>
             
             <!-- Connexions -->
-            <line x1="400" y1="80" x2="400" y2="150" stroke="#666" stroke-width="2"/>
-            <line x1="400" y1="230" x2="200" y2="290" stroke="#666" stroke-width="2"/>
+            <line class="connection" x1="400" y1="80" x2="400" y2="150" stroke="#666" stroke-width="2"/>
+            <line class="connection" x1="400" y1="230" x2="200" y2="290" stroke="#666" stroke-width="2"/>
             
-            <line x1="200" y1="350" x2="110" y2="420" stroke="#666" stroke-width="2"/>
-            <line x1="200" y1="350" x2="280" y2="420" stroke="#666" stroke-width="2"/>
+            <line class="connection" x1="200" y1="350" x2="110" y2="420" stroke="#666" stroke-width="2"/>
+            <line class="connection" x1="200" y1="350" x2="280" y2="420" stroke="#666" stroke-width="2"/>
             
-            <line x1="280" y1="420" x2="450" y2="420" stroke="#666" stroke-width="2"/>
-            <line x1="400" y1="230" x2="630" y2="420" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+            <line class="connection" x1="280" y1="420" x2="450" y2="420" stroke="#666" stroke-width="2"/>
+            <line class="connection" x1="400" y1="230" x2="630" y2="420" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
           </svg>
         </div>
         
@@ -156,6 +160,20 @@ import Layout from '../layouts/Layout.astro';
     text-align: center;
   }
 
+  .instruction {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: var(--spacing-md) 0;
+    font-style: italic;
+  }
+
+  .instruction .icon {
+    font-size: 1.3rem;
+    margin-right: 0.3rem;
+    vertical-align: middle;
+  }
+
   .architecture-diagram {
     margin: var(--spacing-xl) 0;
   }
@@ -186,6 +204,23 @@ import Layout from '../layouts/Layout.astro';
   .node text {
     pointer-events: none;
     font-weight: 600;
+  }
+
+  .connection {
+    stroke-dasharray: 8;
+    animation: flow 1s linear infinite;
+    opacity: 0.6;
+    transition: all var(--transition-fast);
+  }
+
+  @keyframes flow {
+    from { stroke-dashoffset: 8; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  .architecture-diagram:hover .connection {
+    stroke: var(--accent-color);
+    opacity: 1;
   }
 
   .node-info {
@@ -245,19 +280,19 @@ import Layout from '../layouts/Layout.astro';
     },
     frontend: {
       title: "Frontend Astro",
-      content: "Site statique généré avec Astro. Ultra-léger (~200KB). Îlots JavaScript pour les parties interactives."
+      content: "Générateur de site statique pour une performance maximale (Score 100/100). Islands Architecture pour l'interactivité ciblée. Conçu pour servir des interfaces modernes, rapides et maintenables. Bundle < 50KB • TTI < 100ms."
     },
     backend: {
       title: "API PHP 8",
-      content: "API REST minimaliste sans framework. Fournit les stats serveur, Docker et gère les contacts."
+      content: "API REST légère sans framework lourd. Architecture MVC simple. Sécurité : Isolation Docker réseau, Secrets via variables d'env (.env), aucun accès root. Monitoring actif via /proc. Rate limiting et validation stricte des entrées."
     },
     database: {
       title: "MariaDB",
       content: "Base de données pour les projets, la timeline, les contacts et les analytics."
     },
     others: {
-      title: "Autres Projets",
-      content: "Conteneurs additionnels pour d'autres projets et expérimentations."
+      title: "Labs & Services Internes",
+      content: "Conteneurs isolés pour expérimentations et services auxiliaires. Chaque projet tourne dans son propre réseau Docker pour garantir la séparation."
     }
   };
 
