@@ -114,6 +114,48 @@
   .loading {
     opacity: 0.6;
   }
+  
+  /* Responsive mobile */
+  @media (max-width: 768px) {
+    .dashboard-widget {
+      padding: var(--spacing-sm);
+    }
+    
+    .dashboard-widget h3 {
+      font-size: 1.2rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xs);
+    }
+    
+    .stat-card {
+      padding: var(--spacing-xs);
+    }
+    
+    .stat-label {
+      font-size: 0.75rem;
+    }
+    
+    .stat-value {
+      font-size: 1.5rem;
+    }
+    
+    .stat-unit {
+      font-size: 0.75rem;
+    }
+    
+    .docker-status {
+      padding: var(--spacing-xs);
+      font-size: 0.85rem;
+    }
+    
+    .last-update {
+      font-size: 0.7rem;
+    }
+  }
 </style>
 
 <script>

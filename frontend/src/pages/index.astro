@@ -270,12 +270,80 @@ import Dashboard from '../components/Dashboard.astro';
   }
 
   @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-lg) 0;
+    }
+    
     .hero h1 {
-      font-size: 2rem;
+      font-size: 1.75rem;
+      margin-bottom: var(--spacing-sm);
     }
     
     .hero-subtitle {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .hero-tagline {
+      font-size: 1rem;
+      margin-bottom: var(--spacing-sm);
+      padding: 0 var(--spacing-sm);
+    }
+    
+    .hero-description {
+      font-size: 0.95rem;
+      margin-bottom: var(--spacing-md);
+      padding: 0 var(--spacing-sm);
+    }
+    
+    .hero-cta {
+      flex-direction: column;
+      gap: var(--spacing-xs);
+      padding: 0 var(--spacing-md);
+    }
+    
+    .hero-cta .btn {
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .tech-card {
+      padding: var(--spacing-sm);
+    }
+    
+    .tech-icon {
+      font-size: 2rem;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .why-card {
+      padding: var(--spacing-md);
+    }
+    
+    .why-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .why-card p {
+      font-size: 0.95rem;
+    }
+    
+    .dashboard-caption {
+      font-size: 0.85rem;
+      padding: 0 var(--spacing-sm);
+    }
+    
+    .cta-card {
+      padding: var(--spacing-md);
+    }
+    
+    .cta-card h2 {
+      font-size: 1.4rem;
+    }
+    
+    .cta-card p {
+      font-size: 0.95rem;
     }
   }
 </style>

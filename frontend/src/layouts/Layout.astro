@@ -36,7 +36,12 @@ const {
       <nav class="navbar">
         <div class="container">
           <a href="/" class="logo">QG Numérique</a>
-          <ul class="nav-menu">
+          <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="nav-menu" id="navMenu">
             <li><a href="/">Home</a></li>
             <li><a href="/architecture">Architecture</a></li>
             <li><a href="/showroom">Showroom</a></li>
@@ -82,6 +87,23 @@ const {
 
     <!-- Scripts -->
     <script>
+      // Menu toggle mobile
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      
+      menuToggle?.addEventListener('click', () => {
+        navMenu?.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+      });
+      
+      // Fermer le menu si on clique sur un lien
+      navMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          menuToggle?.classList.remove('active');
+        });
+      });
+      
       // Theme toggle
       const themeToggle = document.getElementById('themeToggle');
       const html = document.documentElement;
