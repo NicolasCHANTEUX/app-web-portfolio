@@ -15,13 +15,16 @@ import Dashboard from '../components/Dashboard.astro';
         <p class="hero-subtitle fade-in">
           Développeur Full-Stack & Passionné d'Infrastructure Auto-hébergée
         </p>
+        <p class="hero-tagline fade-in">
+          Du code jusqu'au serveur, je maîtrise toute la chaîne pour concevoir des applications robustes, sécurisées et entièrement sous contrôle.
+        </p>
         <p class="hero-description fade-in">
           Ce portfolio n'est pas qu'un simple site web. C'est une infrastructure complète 
           auto-hébergée qui démontre mes compétences en développement, DevOps et administration système.
         </p>
         <div class="hero-cta fade-in">
-          <a href="/showroom" class="btn">Voir mes projets</a>
-          <a href="/architecture" class="btn btn-secondary">Découvrir l'infrastructure</a>
+          <a href="/showroom" class="btn btn-primary">Voir ce que je construis</a>
+          <a href="/architecture" class="btn btn-secondary">Comment ce site fonctionne</a>
         </div>
       </div>
     </div>
@@ -30,6 +33,11 @@ import Dashboard from '../components/Dashboard.astro';
   <!-- Dashboard Section -->
   <section class="dashboard-section">
     <div class="container">
+      <div class="dashboard-intro">
+        <p class="dashboard-caption">
+          Données issues de mon infrastructure auto-hébergée, mises à jour en temps réel.
+        </p>
+      </div>
       <Dashboard />
     </div>
   </section>
@@ -74,6 +82,21 @@ import Dashboard from '../components/Dashboard.astro';
             <span class="tag">Nginx</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Section -->
+  <section class="why-section">
+    <div class="container-narrow">
+      <div class="why-card">
+        <h2>💡 Pourquoi ce portfolio ?</h2>
+        <p>
+          Ce portfolio est pensé comme une <strong>vitrine technique réelle</strong>, pas une démo fictive. 
+          Chaque ligne de code, chaque service Docker, chaque métrique affichée reflète un système en production. 
+          L'auto-hébergement n'est pas qu'une philosophie : c'est une preuve de maîtrise complète, 
+          de la conception à l'exploitation.
+        </p>
       </div>
     </div>
   </section>
@@ -133,6 +156,14 @@ import Dashboard from '../components/Dashboard.astro';
     margin-bottom: var(--spacing-sm);
   }
 
+  .hero-tagline {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    font-weight: 500;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+  }
+
   .hero-description {
     font-size: 1.1rem;
     color: var(--text-secondary);
@@ -149,6 +180,46 @@ import Dashboard from '../components/Dashboard.astro';
 
   .dashboard-section {
     background-color: var(--bg-primary);
+    padding: var(--spacing-xl) 0;
+  }
+
+  .dashboard-intro {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .dashboard-caption {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+
+  .why-section {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  }
+
+  .why-card {
+    background: var(--bg-accent);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-align: center;
+    border: 1px solid var(--border-color);
+  }
+
+  .why-card h2 {
+    margin-bottom: var(--spacing-md);
+    font-size: 1.8rem;
+  }
+
+  .why-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .why-card strong {
+    color: var(--accent-color);
   }
 
   .tech-grid {
