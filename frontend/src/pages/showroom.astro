@@ -8,7 +8,7 @@ let projects = [];
 let error = null;
 
 try {
-  const response = await fetch(`${API_BASE_URL}/projects.php`);
+  const response = await fetch(`${API_BASE_URL}/projects`);
   const data = await response.json();
   
   if (data.success) {
