@@ -4,7 +4,7 @@
 -- Nettoyage des données d'exemple
 DELETE FROM projects;
 
--- Projet 1 : Music Streaming App
+-- Projet 1 : Music Streaming App (Mise à jour basée sur le code source)
 INSERT INTO projects (
     slug, 
     title, 
@@ -19,17 +19,17 @@ INSERT INTO projects (
     category
 ) VALUES (
     'music-streaming-app',
-    'Streamify (Web & Android)',
-    'Alternative à Spotify auto-hébergée avec import YouTube et application Android native.',
+    'Streamify (Web & PWA)',
+    'Plateforme de streaming musical auto-hébergée avec moteur de téléchargement YouTube intégré et interface Mobile-First.',
     JSON_OBJECT(
-        'challenge', 'Créer une expérience de streaming fluide sur mobile et en voiture (via Z-Link), sans dépendre d\'un abonnement tiers, avec gestion de cache hors-ligne.',
-        'solution', 'Architecture hybride : une Web App responsive encapsulée en APK via Capacitor pour l\'accès natif, couplée à un script d\'import YouTube (yt-dlp) côté serveur.',
-        'architecture', 'Backend PHP MVC sur mesure (sans framework lourd) pour la performance, Frontend Vanilla JS avec chargement infini et API MediaSession pour les contrôles écran verrouillé.'
+        'challenge', 'Concevoir un clone de Spotify léger et indépendant, capable de télécharger, convertir et taguer (ID3) de la musique depuis YouTube tout en offrant une lecture fluide sur mobile sans latence.',
+        'solution', 'Architecture "Mobile-First" utilisant l\'API MediaSession pour les contrôles natifs (écran verrouillé). Backend intelligent combinant yt-dlp et FFmpeg pour l\'extraction audio et l\'optimisation automatique des pochettes.',
+        'architecture', 'Backend PHP 8 en architecture MVC sur-mesure (From Scratch) pour une performance maximale. Frontend en Vanilla JS avec gestion de file d\'attente, cache local et pré-chargement des pistes suivantes (Gapless playback).'
     ),
-    '["PHP 8 MVC", "Capacitor", "MySQL", "TailwindCSS", "yt-dlp"]',
+    '["PHP 8 (Custom MVC)", "TailwindCSS", "Vanilla JS", "MySQL", "yt-dlp", "FFmpeg"]',
     'https://github.com/NicolasCHANTEUX/streaming-web-app',
     'https://music.chanteaux.duckdns.org',
-    '/images/projects/streaming-app.jpg',
+    '/images/projects/streaming-app.png',
     1,
     TRUE,
     'showroom'
@@ -68,33 +68,33 @@ INSERT INTO projects (
 
 -- Projet 3 : Exemple de projet "Labo" (Script d'automatisation)
 INSERT INTO projects (
-    slug,
-    title,
-    description,
-    content,
-    technologies,
-    github_url,
-    demo_url,
-    image_url,
-    display_order,
-    is_featured,
+    slug, 
+    title, 
+    description, 
+    content, 
+    technologies, 
+    github_url, 
+    demo_url, 
+    image_url, 
+    display_order, 
+    is_featured, 
     category
 ) VALUES (
-    'docker-backup-automation',
-    'Système de Backup Docker',
-    'Script automatisé de sauvegarde incrémentale des volumes Docker avec rotation.',
+    'kayart',
+    'KayArt - Boutique Artisanale',
+    'Plateforme e-commerce sur mesure : gestion de produits, paiements Stripe et facturation automatisée.',
     JSON_OBJECT(
-        'challenge', 'Sauvegarder automatiquement tous les volumes Docker sans arrêter les services et sans saturer le disque.',
-        'solution', 'Script Bash + Cron utilisant rsync pour les sauvegardes incrémentales, avec compression et rotation automatique (7 jours + 4 semaines).',
-        'architecture', 'Architecture simple : Hook systemd pour notification en cas d\'échec, logs centralisés, script modulaire pour ajout facile de nouveaux volumes.'
+        'challenge', 'Digitaliser l\'activité complète d\'un artisan (commandes, factures, blog) sans dépendre de solutions lourdes (type Shopify). Contrainte forte : hébergement sur matériel recyclé (PC Linux Mint) et gestion performante d\'images lourdes venant de smartphones.',
+        'solution', 'Développement d\'une application MVC optimisée avec CodeIgniter 4. Création d\'un pipeline de traitement d\'images robuste (détection EXIF, redimensionnement intelligent) pour éviter les saturations mémoire. Intégration de Stripe via Webhooks pour la sécurité des paiements.',
+        'architecture', 'Stack LAMP légère (Linux Mint, Apache, PHP 8.3, MySQL). Génération de PDF natifs pour les factures (dompdf/tcpdf). Architecture modulaire avec séparation stricte Admin/Client et sécurisation des données sensibles (RGPD).'
     ),
-    '["Bash", "Docker", "rsync", "systemd"]',
-    'https://github.com/NicolasCHANTEUX/docker-backup',
-    NULL,
-    '/images/projects/backup-script.jpg',
+    '["CodeIgniter 4", "PHP 8.3", "Stripe API", "MySQL", "TailwindCSS", "Linux Mint"]',
+    'https://github.com/NicolasCHANTEUX/app-web-vincent-2',
+    'https://kayart.ddns.net/', 
+    '/images/projects/kayart.jpg',
     3,
-    FALSE,
-    'labo'
+    TRUE,
+    'showroom'
 );
 
 -- Note : Pense à ajouter les captures d'écran correspondantes dans frontend/public/images/projects/

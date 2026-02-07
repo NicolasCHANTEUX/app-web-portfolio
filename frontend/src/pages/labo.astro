@@ -1,0 +1,488 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+// Récupérer tout le contenu du labo
+const laboItems = await getCollection('labo');
+
+// Grouper par type
+const scripts = laboItems.filter((item: CollectionEntry<'labo'>) => item.data.type === 'script');
+const configs = laboItems.filter((item: CollectionEntry<'labo'>) => item.data.type === 'config');
+const snippets = laboItems.filter((item: CollectionEntry<'labo'>) => item.data.type === 'snippet');
+const tools = laboItems.filter((item: CollectionEntry<'labo'>) => item.data.type === 'tool');
+
+// Pre-render all items
+const renderedItems = await Promise.all(
+  laboItems.map(async (item: CollectionEntry<'labo'>) => ({
+    ...item,
+    Content: (await item.render()).Content,
+  }))
+);
+
+// Icônes par type
+const typeIcons = {
+  script: '🤖',
+  config: '⚙️',
+  snippet: '💡',
+  tool: '🐳'
+};
+
+// Badges de difficulté
+const difficultyColors = {
+  beginner: '#10b981',
+  intermediate: '#f59e0b',
+  advanced: '#ef4444'
+};
+---
+
+<Layout title="Labo - Atelier DevOps">
+  <section class="labo-section">
+    <div class="labo-container">
+      <!-- Header -->
+      <div class="labo-header">
+        <h1>🧪 Le Labo</h1>
+        <p class="intro">
+          Mon atelier d'expérimentations : scripts, configs et hacks pour faire tourner ce portfolio sur du matériel recyclé.
+          <br><strong>Philosophy:</strong> Green IT meets DevOps.
+        </p>
+      </div>
+
+      <!-- Layout type VS Code -->
+      <div class="labo-layout">
+        <!-- Sidebar (Explorer) -->
+        <aside class="labo-sidebar">
+          <div class="sidebar-header">📁 EXPLORATEUR</div>
+          
+          {scripts.length > 0 && (
+            <div class="sidebar-section">
+              <div class="section-title">
+                <span class="icon">🤖</span>
+                <span>SCRIPTS ({scripts.length})</span>
+              </div>
+              <ul class="file-list">
+                {scripts.map((item: CollectionEntry<'labo'>) => (
+                  <li>
+                    <a href={`#${item.slug}`} class="file-item">
+                      <span class="file-icon">📄</span>
+                      <span class="file-name">{item.data.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {configs.length > 0 && (
+            <div class="sidebar-section">
+              <div class="section-title">
+                <span class="icon">⚙️</span>
+                <span>CONFIGS ({configs.length})</span>
+              </div>
+              <ul class="file-list">
+                {configs.map((item: CollectionEntry<'labo'>) => (
+                  <li>
+                    <a href={`#${item.slug}`} class="file-item">
+                      <span class="file-icon">📄</span>
+                      <span class="file-name">{item.data.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {tools.length > 0 && (
+            <div class="sidebar-section">
+              <div class="section-title">
+                <span class="icon">🐳</span>
+                <span>OUTILS ({tools.length})</span>
+              </div>
+              <ul class="file-list">
+                {tools.map((item: CollectionEntry<'labo'>) => (
+                  <li>
+                    <a href={`#${item.slug}`} class="file-item">
+                      <span class="file-icon">📄</span>
+                      <span class="file-name">{item.data.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {snippets.length > 0 && (
+            <div class="sidebar-section">
+              <div class="section-title">
+                <span class="icon">💡</span>
+                <span>SNIPPETS ({snippets.length})</span>
+              </div>
+              <ul class="file-list">
+                {snippets.map((item: CollectionEntry<'labo'>) => (
+                  <li>
+                    <a href={`#${item.slug}`} class="file-item">
+                      <span class="file-icon">📄</span>
+                      <span class="file-name">{item.data.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </aside>
+
+        <!-- Main Content -->
+        <main class="labo-main">
+          {renderedItems.map((item) => (
+              <article id={item.slug} class="labo-article">
+                <div class="article-header">
+                  <div class="title-row">
+                    <h2>
+                      <span class="type-icon">{typeIcons[item.data.type as keyof typeof typeIcons]}</span>
+                      {item.data.title}
+                    </h2>
+                    {item.data.difficulty && (
+                      <span 
+                        class="difficulty-badge" 
+                        style={`background: ${difficultyColors[item.data.difficulty as keyof typeof difficultyColors]}`}
+                      >
+                        {item.data.difficulty}
+                      </span>
+                    )}
+                  </div>
+                  <p class="article-description">{item.data.description}</p>
+                  <div class="article-tags">
+                    {item.data.tags.map((tag: string) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <div class="article-content prose">
+                  <item.Content />
+                </div>
+              </article>
+            )
+          )}
+
+          {laboItems.length === 0 && (
+            <div class="empty-state">
+              <p>🔧 Le labo est en construction...</p>
+              <p class="hint">Revenez bientôt pour découvrir mes scripts et configurations !</p>
+            </div>
+          )}
+        </main>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .labo-section {
+    min-height: 100vh;
+    background: var(--bg-primary);
+  }
+
+  .labo-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+  }
+
+  .labo-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .labo-header h1 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .intro strong {
+    color: var(--accent-color);
+  }
+
+  /* Layout VS Code style */
+  .labo-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: 700px;
+    border: 1px solid var(--border-color);
+  }
+
+  /* Sidebar */
+  .labo-sidebar {
+    background: var(--bg-accent);
+    border-right: 1px solid var(--border-color);
+    padding: var(--spacing-md);
+    overflow-y: auto;
+  }
+
+  .sidebar-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-xs) 0;
+  }
+
+  .sidebar-section {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: var(--spacing-xs);
+  }
+
+  .section-title .icon {
+    font-size: 1rem;
+  }
+
+  .file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    font-size: 0.9rem;
+  }
+
+  .file-item:hover {
+    background: var(--bg-secondary);
+    color: var(--accent-color);
+  }
+
+  .file-icon {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  .file-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Main content */
+  .labo-main {
+    padding: var(--spacing-xl);
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+
+  .labo-article {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .labo-article:last-child {
+    border-bottom: none;
+  }
+
+  .article-header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .labo-article h2 {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .type-icon {
+    font-size: 1.5rem;
+  }
+
+  .difficulty-badge {
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    text-transform: capitalize;
+  }
+
+  .article-description {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin: var(--spacing-sm) 0;
+  }
+
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--spacing-sm);
+  }
+
+  .tag {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Content styling (markdown) */
+  .article-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+  }
+
+  .prose :global(h2) {
+    font-size: 1.5rem;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--accent-color);
+  }
+
+  .prose :global(h3) {
+    font-size: 1.2rem;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+  }
+
+  .prose :global(pre) {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .prose :global(code) {
+    font-family: 'Courier New', monospace;
+    background: var(--bg-accent);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9em;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-md) 0;
+  }
+
+  .prose :global(th),
+  .prose :global(td) {
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-sm);
+    text-align: left;
+  }
+
+  .prose :global(th) {
+    background: var(--bg-accent);
+    font-weight: 600;
+  }
+
+  .prose :global(blockquote) {
+    border-left: 4px solid var(--accent-color);
+    padding-left: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+  }
+
+  .empty-state .hint {
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 968px) {
+    .labo-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .labo-sidebar {
+      border-right: none;
+      border-bottom: 1px solid var(--border-color);
+      max-height: 300px;
+    }
+
+    .labo-main {
+      max-height: none;
+    }
+
+    .labo-header h1 {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .labo-container {
+      padding: var(--spacing-md);
+    }
+
+    .labo-main {
+      padding: var(--spacing-md);
+    }
+
+    .article-header h2 {
+      font-size: 1.4rem;
+    }
+
+    .title-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+    }
+  }
+</style>
