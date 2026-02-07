@@ -9,5 +9,15 @@ export default defineConfig({
   build: {
     assets: 'assets'
   },
-  compressHTML: true
+  compressHTML: true,
+  markdown: {
+    shikiConfig: {
+      // Theme adapté au dark mode avec bon contraste
+      theme: 'one-dark-pro',
+      // Wrap pour éviter l'overflow horizontal excessif
+      wrap: true,
+      // Langages supportés (auto-détecté généralement)
+      langs: []
+    }
+  }
 });

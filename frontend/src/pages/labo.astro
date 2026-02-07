@@ -62,7 +62,7 @@ const difficultyColors = {
               <ul class="file-list">
                 {scripts.map((item: CollectionEntry<'labo'>) => (
                   <li>
-                    <a href={`#${item.slug}`} class="file-item">
+                    <a href={`#${item.slug}`} class="file-item" data-target={item.slug}>
                       <span class="file-icon">📄</span>
                       <span class="file-name">{item.data.title}</span>
                     </a>
@@ -81,7 +81,7 @@ const difficultyColors = {
               <ul class="file-list">
                 {configs.map((item: CollectionEntry<'labo'>) => (
                   <li>
-                    <a href={`#${item.slug}`} class="file-item">
+                    <a href={`#${item.slug}`} class="file-item" data-target={item.slug}>
                       <span class="file-icon">📄</span>
                       <span class="file-name">{item.data.title}</span>
                     </a>
@@ -100,7 +100,7 @@ const difficultyColors = {
               <ul class="file-list">
                 {tools.map((item: CollectionEntry<'labo'>) => (
                   <li>
-                    <a href={`#${item.slug}`} class="file-item">
+                    <a href={`#${item.slug}`} class="file-item" data-target={item.slug}>
                       <span class="file-icon">📄</span>
                       <span class="file-name">{item.data.title}</span>
                     </a>
@@ -119,7 +119,7 @@ const difficultyColors = {
               <ul class="file-list">
                 {snippets.map((item: CollectionEntry<'labo'>) => (
                   <li>
-                    <a href={`#${item.slug}`} class="file-item">
+                    <a href={`#${item.slug}`} class="file-item" data-target={item.slug}>
                       <span class="file-icon">📄</span>
                       <span class="file-name">{item.data.title}</span>
                     </a>
@@ -175,6 +175,67 @@ const difficultyColors = {
   </section>
 </Layout>
 
+<script is:inline>
+  // Scroll spy pour mettre en évidence la section active dans la sidebar
+  document.addEventListener('DOMContentLoaded', () => {
+    const articles = document.querySelectorAll('.labo-article');
+    const navLinks = document.querySelectorAll('.file-item[data-target]');
+    
+    if (articles.length === 0 || navLinks.length === 0) return;
+
+    // Options pour l'IntersectionObserver
+    const options = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px', // Zone de détection au centre de l'écran
+      threshold: 0
+    };
+
+    // Callback quand une section entre/sort de la zone visible
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          
+          // Retirer la classe active de tous les liens
+          navLinks.forEach((link) => {
+            link.classList.remove('active');
+          });
+          
+          // Ajouter la classe active au lien correspondant
+          const activeLink = document.querySelector('.file-item[data-target="' + id + '"]');
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      });
+    };
+
+    // Créer l'observer
+    const observer = new IntersectionObserver(observerCallback, options);
+
+    // Observer toutes les sections
+    articles.forEach((article) => {
+      observer.observe(article);
+    });
+
+    // Smooth scroll pour les liens de navigation
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('data-target');
+        const targetSection = document.getElementById(targetId);
+        
+        if (targetSection) {
+          targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  });
+</script>
+
 <style>
   .labo-section {
     min-height: 100vh;
@@ -213,17 +274,37 @@ const difficultyColors = {
     gap: 0;
     background: var(--bg-secondary);
     border-radius: var(--radius-lg);
-    overflow: hidden;
+    overflow: visible;
     min-height: 700px;
     border: 1px solid var(--border-color);
+    position: relative;
+  }
+
+  /* Background de la colonne sidebar */
+  .labo-layout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: var(--bg-accent);
+    border-right: 1px solid var(--border-color);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    z-index: 0;
   }
 
   /* Sidebar */
   .labo-sidebar {
-    background: var(--bg-accent);
-    border-right: 1px solid var(--border-color);
     padding: var(--spacing-md);
+    /* Sticky pour rester visible pendant le scroll */
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
+    /* Au-dessus du background du parent */
+    z-index: 1;
   }
 
   .sidebar-header {
@@ -278,6 +359,19 @@ const difficultyColors = {
     color: var(--accent-color);
   }
 
+  /* État actif (section visible) */
+  .file-item.active {
+    background: var(--bg-secondary);
+    color: var(--accent-color);
+    border-left: 3px solid var(--accent-color);
+    padding-left: calc(var(--spacing-sm) - 3px);
+    font-weight: 600;
+  }
+
+  .file-item.active .file-icon {
+    opacity: 1;
+  }
+
   .file-icon {
     font-size: 0.9rem;
     opacity: 0.7;
@@ -293,8 +387,12 @@ const difficultyColors = {
   /* Main content */
   .labo-main {
     padding: var(--spacing-xl);
-    overflow-y: auto;
-    max-height: 80vh;
+    /* Pas de scroll trap - la page entière défile naturellement */
+    overflow-y: visible;
+    height: auto;
+    /* Au-dessus du background */
+    position: relative;
+    z-index: 1;
   }
 
   .labo-article {
@@ -362,6 +460,14 @@ const difficultyColors = {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    transition: all var(--transition-fast);
+    cursor: default;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .tag:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
   /* Content styling (markdown) */
@@ -386,26 +492,48 @@ const difficultyColors = {
   }
 
   .prose :global(pre) {
-    background: var(--bg-primary);
+    background: #1e1e1e;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     overflow-x: auto;
     font-size: 0.9rem;
     line-height: 1.6;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  /* Language label pour les code blocks */
+  .prose :global(pre[class*="language-"]:before) {
+    content: attr(data-language);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
   }
 
   .prose :global(code) {
-    font-family: 'Courier New', monospace;
-    background: var(--bg-accent);
+    font-family: 'Fira Code', 'Courier New', monospace;
+    background: rgba(110, 118, 129, 0.2);
     padding: 0.15rem 0.4rem;
     border-radius: var(--radius-sm);
     font-size: 0.9em;
+    color: #e06c75;
+    font-weight: 500;
   }
 
   .prose :global(pre code) {
     background: none;
     padding: 0;
+    color: inherit;
+    font-weight: normal;
   }
 
   .prose :global(table) {
