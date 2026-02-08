@@ -22,6 +22,8 @@ INSERT INTO projects (
     'Streamify (Web & PWA)',
     'Plateforme de streaming musical auto-hébergée avec moteur de téléchargement YouTube intégré et interface Mobile-First.',
     JSON_OBJECT(
+        'tagline', 'Clone Spotify auto-hébergé optimisé mobile',
+        'lesson', 'La vraie perf vient de l\'optimisation logicielle, pas du hardware.',
         'challenge', 'Concevoir un clone de Spotify léger et indépendant, capable de télécharger, convertir et taguer (ID3) de la musique depuis YouTube tout en offrant une lecture fluide sur mobile sans latence.',
         'solution', 'Architecture "Mobile-First" utilisant l\'API MediaSession pour les contrôles natifs (écran verrouillé). Backend intelligent combinant yt-dlp et FFmpeg pour l\'extraction audio et l\'optimisation automatique des pochettes.',
         'architecture', 'Backend PHP 8 en architecture MVC sur-mesure (From Scratch) pour une performance maximale. Frontend en Vanilla JS avec gestion de file d\'attente, cache local et pré-chargement des pistes suivantes (Gapless playback).'
@@ -53,6 +55,8 @@ INSERT INTO projects (
     'QG Numérique Green-IT',
     'Vitrine technique éco-conçue hébergée sur du matériel recyclé (< 5 Watts).',
     JSON_OBJECT(
+        'tagline', 'Vitrine Green-IT sous 5W hébergée sur Raspberry Pi',
+        'lesson', 'Green IT = contrainte créative qui force l\'excellence technique.',
         'challenge', 'Héberger un site performant et moderne sur du vieux matériel recyclé, avec monitoring en temps réel et consommation énergétique minimale.',
         'solution', 'Architecture hybride (Statique + API légère) servie via Cloudflare Tunnel, avec optimisation extrême des ressources.',
         'architecture', 'Frontend Astro (Islands Architecture) générant du statique ultra-léger, Backend PHP 8.2-FPM minimal, Nginx avec cache agressif, conteneurs Alpine Linux optimisés.'
@@ -84,6 +88,8 @@ INSERT INTO projects (
     'KayArt - Boutique Artisanale',
     'Plateforme e-commerce sur mesure : gestion de produits, paiements Stripe et facturation automatisée.',
     JSON_OBJECT(
+        'tagline', 'E-commerce sur mesure avec Stripe et panier temps réel',
+        'lesson', 'Construire from scratch donne une maîtrise totale du flow métier.',
         'challenge', 'Digitaliser l\'activité complète d\'un artisan (commandes, factures, blog) sans dépendre de solutions lourdes (type Shopify). Contrainte forte : hébergement sur matériel recyclé (PC Linux Mint) et gestion performante d\'images lourdes venant de smartphones.',
         'solution', 'Développement d\'une application MVC optimisée avec CodeIgniter 4. Création d\'un pipeline de traitement d\'images robuste (détection EXIF, redimensionnement intelligent) pour éviter les saturations mémoire. Intégration de Stripe via Webhooks pour la sécurité des paiements.',
         'architecture', 'Stack LAMP légère (Linux Mint, Apache, PHP 8.3, MySQL). Génération de PDF natifs pour les factures (dompdf/tcpdf). Architecture modulaire avec séparation stricte Admin/Client et sécurisation des données sensibles (RGPD).'
