@@ -287,5 +287,29 @@ const laboProjects = projects.filter((p: any) => p.category === 'labo');
         });
       });
     });
+
+    // ✅ ACCORDION EXCLUSIF - Une seule carte ouverte à la fois
+    const allDetails = document.querySelectorAll('.tech-details');
+    
+    allDetails.forEach(details => {
+      details.addEventListener('toggle', (e) => {
+        const target = e.target as HTMLDetailsElement;
+        
+        // Si cette carte vient de s'ouvrir
+        if (target.open) {
+          // Fermer toutes les autres cartes
+          allDetails.forEach(otherDetails => {
+            if (otherDetails !== target && (otherDetails as HTMLDetailsElement).open) {
+              (otherDetails as HTMLDetailsElement).open = false;
+            }
+          });
+          
+          // Scroll smooth vers la carte ouverte (UX++)
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 100);
+        }
+      });
+    });
   });
 </script>
