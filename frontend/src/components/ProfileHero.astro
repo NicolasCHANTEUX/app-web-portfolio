@@ -12,17 +12,19 @@
       <div class="human-side">
         <div class="avatar-container">
           <img 
-            src="/images/profile/avatar.jpg" 
+            src="/images/profile/avatar.webp" 
+            width="140" 
+            height="140" 
             alt="Nicolas Chanteux" 
             class="avatar"
             loading="eager"
           />
-          <div class="status-badge">🟢 ONLINE</div>
+          <div class="status-badge">🚀 Open to Work</div>
         </div>
         
         <div class="bio">
           <h1 class="name">Nicolas Chanteux</h1>
-          <p class="role">$ whoami → <span class="role-highlight">Full-Stack Developer & DevOps Explorer</span></p>
+          <p class="role">$ whoami → <span class="role-highlight typewriter">Full-Stack Developer & DevOps Explorer</span></p>
           
           <div class="description">
             <p>
@@ -146,14 +148,14 @@
     bottom: 5px;
     right: 5px;
     background: #000;
-    color: #22c55e;
-    border: 2px solid #22c55e;
+    color: #fbbf24;
+    border: 2px solid #fbbf24;
     padding: 3px 10px;
     border-radius: 12px;
     font-size: 0.7rem;
     font-weight: 700;
     font-family: 'Courier New', monospace;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
   }
 
   .bio {
@@ -180,6 +182,33 @@
   .role-highlight {
     color: var(--accent-color);
     font-weight: 600;
+  }
+
+  /* Effet Typewriter sur le role */
+  .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid var(--accent-color);
+    white-space: nowrap;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { 
+      width: 0;
+    }
+    to { 
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from, to { 
+      border-color: transparent;
+    }
+    50% { 
+      border-color: var(--accent-color);
+    }
   }
 
   .description {

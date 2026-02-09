@@ -1,0 +1,12 @@
+# Robots.txt - Configuration SEO
+# Permet à tous les robots de crawler le site
+
+User-agent: *
+Allow: /
+
+# Sitemap XML (généré par Astro)
+Sitemap: https://portfolio-nicolas-chanteux.duckdns.org/sitemap-index.xml
+
+# Interdire l'accès aux fichiers techniques
+Disallow: /api/
+Disallow: /_astro/
