@@ -1,0 +1,457 @@
+---
+/**
+ * Section "Pilote" - Humanisation du portfolio
+ * Le créateur derrière la machine
+ */
+---
+
+<section class="profile-hero">
+  <div class="container">
+    <div class="profile-layout">
+      <!-- Côté Humain -->
+      <div class="human-side">
+        <div class="avatar-container">
+          <img 
+            src="/images/profile/avatar.jpg" 
+            alt="Nicolas Chanteux" 
+            class="avatar"
+            loading="eager"
+          />
+          <div class="status-badge">🟢 ONLINE</div>
+        </div>
+        
+        <div class="bio">
+          <h1 class="name">Nicolas Chanteux</h1>
+          <p class="role">$ whoami → <span class="role-highlight">Full-Stack Developer & DevOps Explorer</span></p>
+          
+          <div class="description">
+            <p>
+              Je ne fais pas que <strong>configurer des serveurs</strong>. 
+              Je construis des <strong>solutions durables</strong> pour des problèmes réels.
+            </p>
+            <p>
+              Quand je ne suis pas en train d'optimiser des Dockerfiles, 
+              je suis probablement en train de <strong>bricoler du hardware recyclé</strong> 
+              ou d'apprendre <strong>de nouvelles technos de monitoring</strong>.
+            </p>
+          </div>
+
+          <div class="traits">
+            <div class="trait-item">
+              <span class="trait-icon">⚡</span>
+              <span class="trait-text">Apprentissage rapide</span>
+            </div>
+            <div class="trait-item">
+              <span class="trait-icon">🔧</span>
+              <span class="trait-text">Autonomie technique</span>
+            </div>
+            <div class="trait-item">
+              <span class="trait-icon">♻️</span>
+              <span class="trait-text">Green IT addict</span>
+            </div>
+          </div>
+
+          <div class="hobbies">
+            <span class="hobby-tag">🎮 Retro Gaming</span>
+            <span class="hobby-tag">🖥️ Tinkering</span>
+            <span class="hobby-tag">☕ Coffee-Driven Development</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicateur de séparation -->
+      <div class="divider">
+        <span class="divider-icon">⚡</span>
+      </div>
+
+      <!-- Côté Machine -->
+      <div class="machine-side">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span class="terminal-btn terminal-close"></span>
+            <span class="terminal-btn terminal-minimize"></span>
+            <span class="terminal-btn terminal-maximize"></span>
+            <span class="terminal-title">system_info.sh</span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="prompt">root@qg-numerique</span>
+              <span class="command">cat /var/www/portfolio/README.md</span>
+            </div>
+            <div class="terminal-output">
+              <p class="output-title"># 🎯 Mission</p>
+              <p>Créer des solutions web complètes, du code à l'infra.</p>
+              <br />
+              <p class="output-title"># 📦 Stack Favorite</p>
+              <ul class="tech-list">
+                <li><span class="tech-bullet">▸</span> PHP 8 / Astro / TypeScript</li>
+                <li><span class="tech-bullet">▸</span> Docker / Nginx / MariaDB</li>
+                <li><span class="tech-bullet">▸</span> Linux / Raspberry Pi / Automation</li>
+              </ul>
+              <br />
+              <p class="output-title"># 💡 Credo</p>
+              <p class="quote">"Le meilleur code est celui qu'on n'a pas besoin d'écrire."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .profile-hero {
+    padding: 3rem 0 4rem;
+    border-bottom: 2px solid var(--border-color);
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  }
+
+  .profile-layout {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  /* ============ CÔTÉ HUMAIN ============ */
+  .human-side {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .avatar-container {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .avatar {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  }
+
+  .avatar:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+
+  .status-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #000;
+    color: #22c55e;
+    border: 2px solid #22c55e;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  }
+
+  .bio {
+    flex: 1;
+  }
+
+  .name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .role {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .role-highlight {
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+
+  .description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .description p {
+    margin-bottom: 0.8rem;
+  }
+
+  .description strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Traits de personnalité */
+  .traits {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .trait-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+  }
+
+  .trait-icon {
+    font-size: 1rem;
+  }
+
+  .trait-text {
+    color: var(--text-secondary);
+  }
+
+  /* Hobbies */
+  .hobbies {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .hobby-tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+  }
+
+  .hobby-tag:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(180deg, transparent 0%, var(--accent-color) 50%, transparent 100%);
+  }
+
+  .divider-icon {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* ============ CÔTÉ MACHINE ============ */
+  .machine-side {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .terminal-window {
+    width: 100%;
+    max-width: 500px;
+    background: #1a1a1a;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+  }
+
+  .terminal-header {
+    background: #2a2a2a;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .terminal-close { background: #ff5f56; }
+  .terminal-minimize { background: #ffbd2e; }
+  .terminal-maximize { background: #27c93f; }
+
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .terminal-line {
+    margin-bottom: 1rem;
+  }
+
+  .prompt {
+    color: #22c55e;
+    font-weight: 600;
+  }
+
+  .prompt::after {
+    content: ' $ ';
+    color: var(--text-secondary);
+  }
+
+  .command {
+    color: var(--accent-color);
+  }
+
+  .terminal-output {
+    color: var(--text-secondary);
+  }
+
+  .output-title {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .tech-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tech-list li {
+    margin-bottom: 0.3rem;
+    color: var(--text-secondary);
+  }
+
+  .tech-bullet {
+    color: var(--accent-color);
+    margin-right: 0.5rem;
+  }
+
+  .quote {
+    font-style: italic;
+    color: var(--text-primary);
+    padding-left: 1rem;
+    border-left: 3px solid var(--accent-color);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .profile-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .divider {
+      display: none;
+    }
+
+    .human-side {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .machine-side {
+      justify-content: center;
+    }
+
+    .traits,
+    .hobbies {
+      justify-content: center;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+    }
+
+    .name {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .profile-hero {
+      padding: 2rem 0 3rem;
+    }
+
+    .terminal-window {
+      max-width: 100%;
+    }
+
+    .terminal-body {
+      padding: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+    }
+
+    .name {
+      font-size: 1.5rem;
+    }
+
+    .role {
+      font-size: 0.9rem;
+    }
+
+    .description {
+      font-size: 0.9rem;
+    }
+
+    .traits {
+      font-size: 0.8rem;
+    }
+
+    .hobby-tag {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.7rem;
+    }
+  }
+</style>
