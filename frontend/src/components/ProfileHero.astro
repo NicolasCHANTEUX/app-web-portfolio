@@ -83,22 +83,28 @@
             </div>
             
             <div class="terminal-output">
-              <p class="output-comment"># 🔋 Énergie & Discipline</p>
-              <p>Le code c'est bien, l'équilibre c'est mieux.</p>
-              <ul class="terminal-list">
-                <li>🏐 <strong>Volley-ball</strong> <span class="dim">(Team spirit)</span></li>
-                <li>🏋️ <strong>Musculation</strong> <span class="dim">(Focus & Progression)</span></li>
-                <li>🏸 <strong>Badminton</strong> <span class="dim">(Réactivité)</span></li>
-              </ul>
-              
-              <br />
-              
-              <p class="output-comment"># 🧠 Mindset</p>
-              <p>Je ne code pas juste pour le travail.</p>
-              <p>J'aime <span class="highlight-term">bricoler</span> des outils persos, explorer de nouveaux langages et comprendre comment les choses fonctionnent <em>(Learning by Doing)</em>.</p>
-              
-              <br />
-              <p class="output-cursor">_</p>
+              <div class="file-content">
+                <span class="md-header"># 🔋 Énergie & Discipline</span>
+                <p class="comment">> Le code c'est bien, l'équilibre c'est mieux.</p>
+                
+                <ul class="terminal-list">
+                  <li><span class="bullet">-</span> [🏐] <strong>Volley-ball</strong> <span class="dim">(Team spirit)</span></li>
+                  <li><span class="bullet">-</span> [🏋️] <strong>Musculation</strong> <span class="dim">(Focus)</span></li>
+                  <li><span class="bullet">-</span> [🏸] <strong>Badminton</strong> <span class="dim">(Réactivité)</span></li>
+                </ul>
+                
+                <br />
+                
+                <span class="md-header"># 🧠 Mindset</span>
+                <p>Je ne code pas juste pour le travail.</p>
+                <p>J'aime <span class="highlight-term">bricoler</span> des outils persos, explorer et comprendre le <span class="green">"Why"</span> et le <span class="green">"How"</span>.</p>
+                <p class="tag-line"><em>Learning by Doing.</em></p>
+              </div>
+            </div>
+
+            <div class="terminal-line">
+              <span class="prompt">nicolas@server:~$</span>
+              <span class="cursor block">_</span>
             </div>
           </div>
         </div>
@@ -358,37 +364,49 @@
   .terminal-body {
     padding: 1.5rem;
     font-family: 'Fira Code', 'Courier New', monospace;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     line-height: 1.6;
+    color: #d4d4d4;
   }
 
   .terminal-line {
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
   }
 
   .prompt {
-    color: #22c55e;
-    font-weight: 600;
-  }
-
-  .prompt::after {
-    content: ' $ ';
-    color: var(--text-secondary);
+    color: var(--accent-color);
+    font-weight: bold;
   }
 
   .command {
-    color: var(--accent-color);
+    color: #fff;
   }
 
   .terminal-output {
-    margin-top: 1rem;
-    color: #e0e0e0;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
   }
 
-  .output-comment {
-    color: #6a9955;
+  /* Style Markdown */
+  .md-header {
+    color: #569cd6;
     font-weight: bold;
-    margin-bottom: 0.4rem;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .md-header:first-child {
+    margin-top: 0;
+  }
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
   }
 
   .terminal-output p {
@@ -397,7 +415,7 @@
 
   .terminal-list {
     list-style: none;
-    padding-left: 1rem;
+    padding: 0;
     margin: 0.5rem 0;
   }
 
@@ -405,40 +423,40 @@
     margin-bottom: 0.4rem;
   }
 
-  .terminal-list li::before {
-    content: "> ";
-    color: var(--accent-color);
-    font-weight: bold;
+  .bullet {
+    color: #c586c0;
+    margin-right: 5px;
   }
 
   .dim {
-    color: #888;
-    font-size: 0.85em;
-    font-style: italic;
+    color: #808080;
+    font-size: 0.9em;
   }
 
   .highlight-term {
     color: #ce9178;
-    font-weight: 500;
   }
 
-  .terminal-output em {
-    color: #999;
+  .green {
+    color: var(--accent-color);
+  }
+
+  .tag-line {
     font-style: italic;
+    color: #999;
   }
 
-  .output-cursor {
+  /* Curseur clignotant bloc */
+  .cursor.block {
     display: inline-block;
     width: 10px;
     height: 1.2em;
-    background: var(--accent-color);
+    background: #d4d4d4;
     animation: blink 1s step-end infinite;
-    vertical-align: middle;
   }
 
   @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+    50% { opacity: 0; }
   }
 
   /* ============ RESPONSIVE ============ */
