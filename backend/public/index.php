@@ -4,7 +4,7 @@
  * Router simple sans framework
  */
 
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 header('X-Powered-By: Portfolio API');
 
 // CORS (à ajuster en production)

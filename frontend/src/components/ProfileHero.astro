@@ -102,6 +102,18 @@
               </div>
             </div>
 
+            <br />
+            
+            <div class="terminal-separator">
+              <span class="comment"># 📄 Besoin d'un format standard ?</span>
+            </div>
+            <div class="terminal-line">
+              <span class="prompt">nicolas@server:~$</span>
+              <span class="command">
+                <a href="/CV_Nicolas_CHANTEUX_Dev_FullStack.pdf" download="CV_Nicolas_Chanteux.pdf" class="link-cmd">curl -O /home/nicolas/CV.pdf</a>
+              </span>
+            </div>
+
             <div class="terminal-line">
               <span class="prompt">nicolas@server:~$</span>
               <span class="cursor block">_</span>
@@ -444,6 +456,25 @@
   .tag-line {
     font-style: italic;
     color: #999;
+  }
+
+  .terminal-separator {
+    margin: 1rem 0 0.5rem 0;
+  }
+
+  .link-cmd {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--accent-color);
+    transition: all 0.2s ease;
+  }
+
+  .link-cmd:hover {
+    color: var(--accent-color);
+    border-bottom-style: solid;
+    background: rgba(139, 92, 246, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
   }
 
   /* Curseur clignotant bloc */

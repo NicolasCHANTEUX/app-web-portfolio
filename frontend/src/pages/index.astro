@@ -241,18 +241,21 @@ import ProfileHero from '../components/ProfileHero.astro';
 
   .tech-tags {
     display: flex;
-    gap: var(--spacing-xs);
+    gap: 0.5rem;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: var(--spacing-sm);
+    margin-top: 1rem;
   }
 
   .tag {
-    background-color: var(--bg-accent);
-    color: var(--text-primary);
-    padding: 0.25rem 0.5rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.875rem;
+    background-color: rgba(139, 92, 246, 0.1);
+    color: var(--accent-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    font-family: 'Fira Code', 'Courier New', monospace;
+    white-space: nowrap;
   }
 
   .cta-section {

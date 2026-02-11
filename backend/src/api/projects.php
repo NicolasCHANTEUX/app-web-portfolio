@@ -44,7 +44,7 @@ try {
         'success' => true,
         'data' => $projects,
         'count' => count($projects)
-    ], JSON_PRETTY_PRINT);
+    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     
 } catch (Exception $e) {
     http_response_code(500);
