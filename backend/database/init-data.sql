@@ -50,7 +50,7 @@ INSERT INTO projects (
     category
 ) VALUES (
     'portfolio-green-it',
-    'QG Numérique Green-IT',
+    '/home/nicolas - Portfolio Green-IT',
     'Vitrine technique éco-conçue hébergée sur du matériel recyclé (< 5 Watts).',
     JSON_OBJECT(
         'challenge', 'Héberger un site performant et moderne sur du vieux matériel recyclé, avec monitoring en temps réel et consommation énergétique minimale.',

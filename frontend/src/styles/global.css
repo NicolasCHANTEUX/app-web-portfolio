@@ -113,6 +113,11 @@ body {
   transition: color var(--transition-fast);
 }
 
+.logo .prompt {
+  color: #22c55e;
+  font-weight: 600;
+}
+
 .logo:hover {
   color: var(--accent-hover);
 }
@@ -179,6 +184,15 @@ body {
 .footer-tagline {
   font-size: 0.9rem;
   color: var(--text-secondary);
+}
+
+.footer-tagline code {
+  background: rgba(139, 92, 246, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--accent-color);
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.85em;
 }
 
 .footer-status {

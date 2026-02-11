@@ -1,6 +1,6 @@
 ---
 year: "2025"
-title: "QG Numérique Live"
+title: "/home/nicolas Live"
 description: "Lancement de ce portfolio : une stack mature avec Astro pour la performance, Nginx pour le cache, et des scripts d'automatisation pour le déploiement."
 icon: "rocket"
 category: "career"
