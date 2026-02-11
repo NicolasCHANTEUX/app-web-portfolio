@@ -73,26 +73,32 @@
             <span class="terminal-btn terminal-close"></span>
             <span class="terminal-btn terminal-minimize"></span>
             <span class="terminal-btn terminal-maximize"></span>
-            <span class="terminal-title">system_info.sh</span>
+            <span class="terminal-title">user_profile.sh</span>
           </div>
+          
           <div class="terminal-body">
             <div class="terminal-line">
-              <span class="prompt">root@qg-numerique</span>
-              <span class="command">cat /var/www/portfolio/README.md</span>
+              <span class="prompt">nicolas@server:~$</span>
+              <span class="command">cat ~/nicolas/lifestyle.md</span>
             </div>
+            
             <div class="terminal-output">
-              <p class="output-title"># 🎯 Mission</p>
-              <p>Créer des solutions web complètes, du code à l'infra.</p>
-              <br />
-              <p class="output-title"># 📦 Stack Favorite</p>
-              <ul class="tech-list">
-                <li><span class="tech-bullet">▸</span> PHP 8 / Astro / TypeScript</li>
-                <li><span class="tech-bullet">▸</span> Docker / Nginx / MariaDB</li>
-                <li><span class="tech-bullet">▸</span> Linux / Raspberry Pi / Automation</li>
+              <p class="output-comment"># 🔋 Énergie & Discipline</p>
+              <p>Le code c'est bien, l'équilibre c'est mieux.</p>
+              <ul class="terminal-list">
+                <li>🏐 <strong>Volley-ball</strong> <span class="dim">(Team spirit)</span></li>
+                <li>🏋️ <strong>Musculation</strong> <span class="dim">(Focus & Progression)</span></li>
+                <li>🏸 <strong>Badminton</strong> <span class="dim">(Réactivité)</span></li>
               </ul>
+              
               <br />
-              <p class="output-title"># 💡 Credo</p>
-              <p class="quote">"Le meilleur code est celui qu'on n'a pas besoin d'écrire."</p>
+              
+              <p class="output-comment"># 🧠 Mindset</p>
+              <p>Je ne code pas juste pour le travail.</p>
+              <p>J'aime <span class="highlight-term">bricoler</span> des outils persos, explorer de nouveaux langages et comprendre comment les choses fonctionnent <em>(Learning by Doing)</em>.</p>
+              
+              <br />
+              <p class="output-cursor">_</p>
             </div>
           </div>
         </div>
@@ -375,36 +381,64 @@
   }
 
   .terminal-output {
-    color: var(--text-secondary);
+    margin-top: 1rem;
+    color: #e0e0e0;
   }
 
-  .output-title {
-    color: var(--accent-color);
-    font-weight: 600;
-    margin-bottom: 0.3rem;
+  .output-comment {
+    color: #6a9955;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
   }
 
-  .tech-list {
+  .terminal-output p {
+    margin-bottom: 0.5rem;
+  }
+
+  .terminal-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .tech-list li {
-    margin-bottom: 0.3rem;
-    color: var(--text-secondary);
-  }
-
-  .tech-bullet {
-    color: var(--accent-color);
-    margin-right: 0.5rem;
-  }
-
-  .quote {
-    font-style: italic;
-    color: var(--text-primary);
     padding-left: 1rem;
-    border-left: 3px solid var(--accent-color);
+    margin: 0.5rem 0;
+  }
+
+  .terminal-list li {
+    margin-bottom: 0.4rem;
+  }
+
+  .terminal-list li::before {
+    content: "> ";
+    color: var(--accent-color);
+    font-weight: bold;
+  }
+
+  .dim {
+    color: #888;
+    font-size: 0.85em;
+    font-style: italic;
+  }
+
+  .highlight-term {
+    color: #ce9178;
+    font-weight: 500;
+  }
+
+  .terminal-output em {
+    color: #999;
+    font-style: italic;
+  }
+
+  .output-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background: var(--accent-color);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
 
   /* ============ RESPONSIVE ============ */
