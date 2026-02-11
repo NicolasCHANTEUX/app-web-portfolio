@@ -55,9 +55,9 @@ import Layout from '../layouts/Layout.astro';
         <div class="contact-info">
           <h3>Autres moyens de contact</h3>
           <ul>
-            <li>📧 Email: chanteux.nicolas@orange.fr</li>
-            <li><a href="https://www.linkedin.com/in/nicolas-chanteux/">💼 LinkedIn: /in/nicolas-chanteux</a></li>
-            <li><a href="https://github.com/NicolasCHANTEUX">🐱 GitHub: /votre-username</li>
+            <li>📧 Email: <a href="mailto:chanteux.nicolas@orange.fr">chanteux.nicolas@orange.fr</a></li>
+            <li><a href="https://www.linkedin.com/in/nicolas-chanteux/" target="_blank" rel="noopener">💼 LinkedIn: /in/nicolas-chanteux</a></li>
+            <li><a href="https://github.com/NicolasCHANTEUX" target="_blank" rel="noopener">🐱 GitHub: /NicolasCHANTEUX</a></li>
           </ul>
 
           <div class="response-time">
@@ -72,6 +72,10 @@ import Layout from '../layouts/Layout.astro';
 <style>
   .contact-section {
     padding: var(--spacing-xl) 0;
+  }
+
+  .contact-section .container-narrow {
+    max-width: 1100px;
   }
 
   .intro {
@@ -116,6 +120,11 @@ import Layout from '../layouts/Layout.astro';
     font-family: inherit;
     font-size: 1rem;
     transition: border-color var(--transition-fast);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 150px;
   }
 
   .form-group input:focus,
@@ -170,6 +179,24 @@ import Layout from '../layouts/Layout.astro';
   .contact-info li {
     padding: var(--spacing-xs) 0;
     color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .contact-info a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid transparent;
+    font-family: 'Fira Code', 'Courier New', monospace;
+  }
+
+  .contact-info a:hover {
+    color: var(--accent-hover);
+    border-bottom-color: var(--accent-color);
+    background: rgba(139, 92, 246, 0.05);
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin: -2px -4px;
   }
 
   .response-time {
